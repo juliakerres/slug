@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+    <style>
+        * {
+            font: 18px Hershey;
+        }
+
+        @font-face {
+            font-family: Hershey;
+            src: url(img/Hershey-Noailles-Futura-Triplex-Regular.otf);
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            vertical-align: super;
+            position: relative;
+            transition: filter 0.3s ease;
+        }
+
+        button:hover {
+            font-size: smaller;
+        }
+
+        .first-button:before,
+        .second-button:before,
+        .third-button:before,
+        .fourth-button:before,
+        .fifth-button:before,
+        .sixth-button:before,
+        .seventh-button:before {
+            perspective: 50px;
+            perspective-origin: 45% 80%;
+        }
+
+        .first-button::after {
+            content: '(ꕀ)';
+            color: blue;
+            position: absolute;
+            rotate: 180deg;
+            top: 10;
+            right: 0;
+            bottom: 3;
+            left: 0;
+            transform: scaleY(0.9) rotateX(0deg);
+            transform-origin: 50% 90%;
+            transform: skew(30deg, 0deg) scale(1, 1.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .second-button::after {
+            content: '(∼)';
+            color: blue;
+            position: absolute;
+            rotate: 180deg;
+            top: 10;
+            right: 0;
+            bottom: 3;
+            left: 0;
+            transform: scaleY(0.9) rotateX(0deg);
+            transform-origin: 50% 90%;
+            transform: skew(30deg, 0deg) scale(1, 1.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .third-button::after {
+            content: '(꒰)';
+            color: blue;
+            position: absolute;
+            rotate: 180deg;
+            top: 10;
+            right: 0;
+            bottom: 3;
+            left: 0;
+            transform: scaleY(0.9) rotateX(0deg);
+            transform-origin: 50% 90%;
+            transform: skew(30deg, 0deg) scale(1, 1.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: transparent;
+        }
+
+        .fourth-button::after {
+            content: '(➿)';
+            color: blue;
+            position: absolute;
+            rotate: 180deg;
+            top: 10;
+            right: 0;
+            bottom: 3;
+            left: 0;
+            transform: scaleY(0.9) rotateX(0deg);
+            transform-origin: 50% 90%;
+            transform: skew(30deg, 0deg) scale(1, 1.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .first-button:hover::after,
+        .second-button:hover::after,
+        .third-button:hover::after,
+        .fourth-button:hover::after,
+        .fifth-button:hover::after,
+        .sixth-button:hover::after,
+        .seventh-button:hover::after {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="first-button">(ꕀ)</button>
+    <button class="second-button">(∼)</button>
+    <button class="third-button">(꒰)</button>
+    <button class="fourth-button">(➿)</button>
+
+    <script>
+        // Funktion zum Hinzufügen eines Slugs zur URL
+        function addSlug(slug) {
+            const currentURL = window.location.pathname;
+            const newURL = `${currentURL}/${slug}`;
+            const title = `URL geändert: ${slug}`;
+            history.pushState(null, title, newURL);
+            document.title = title;
+        }
+
+        // Event-Listener für jeden Button hinzufügen
+        document.querySelector('.first-button').addEventListener('click', function () {
+            addSlug('erste-adresse');
+        });
+
+        document.querySelector('.second-button').addEventListener('click', function () {
+            addSlug('zweite-adresse');
+        });
+
+        document.querySelector('.third-button').addEventListener('click', function () {
+            addSlug('dritte-adresse');
+        });
+
+        document.querySelector('.fourth-button').addEventListener('click', function () {
+            addSlug('vierte-adresse');
+        });
+
+        // Funktion zum Verarbeiten der URL beim Laden der Seite
+        function handlePageLoad() {
+            const path = window.location.pathname;
+            const parts = path.split('/').filter(Boolean); // Filtert leere Teile heraus
+
+            if (parts.length > 0) {
+                // Nehme den letzten Teil der URL (den neuesten Slug)
+                const lastPart = parts[parts.length - 1];
+
+                // Hier könntest du Logik hinzufügen, um verschiedene Inhalte oder Zustände basierend auf dem Slug anzuzeigen
+                console.log(`Aktueller Slug: ${lastPart}`);
+                document.title = `URL geladen: ${lastPart}`;
+            }
+        }
+
+        // Rufe handlePageLoad beim Laden der Seite auf
+        window.addEventListener('load', handlePageLoad);
+    </script>
+</body>
+
+</html>
