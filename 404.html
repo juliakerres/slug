@@ -158,6 +158,55 @@
             document.title = title;
         }
 
+
+        // Event-Listener für jeden Button hinzufügen
+        document.querySelector('.first-button').addEventListener('click', function () {
+            addSlug('enter-u(i)rl-from-multiple-directions');
+        });
+
+        document.querySelector('.second-button').addEventListener('click', function () {
+            addSlug('simply-suggesting-no-straight-line');
+        });
+
+        document.querySelector('.third-button').addEventListener('click', function () {
+            addSlug('a-repository-of-meaning');
+        });
+
+        document.querySelector('.fourth-button').addEventListener('click', function () {
+            addSlug('detached-from-the-institutionalised-thought');
+        });
+
+        document.querySelector('.fifth-button').addEventListener('click', function () {
+            addSlug('holding-things-in-a-particular-powerful-relation-to-one-another-and-to-us');
+        });
+
+        document.querySelector('.sixth-button').addEventListener('click', function () {
+            addSlug('accumulated-in-hybrid-space-and-linked-to-the-matter-i--r--l');
+        });
+
+        document.querySelector('.seventh-button').addEventListener('click', function () {
+            addSlug('as-a-soft-blend-of-factual-and-non~factual');
+        });
+
+        document.querySelector('.eighth-button').addEventListener('click', function () {
+            addSlug('acting-as-a-reading-room');
+        });
+
+        // Funktion, um zufällige Positionen für Buttons zu generieren
+        function randomizeButtonPositions() {
+            const buttons = document.querySelectorAll('button');
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            buttons.forEach(button => {
+                const randomX = Math.floor(Math.random() * (windowWidth - button.offsetWidth));
+                const randomY = Math.floor(Math.random() * (windowHeight - button.offsetHeight));
+
+                button.style.left = `${randomX}px`;
+                button.style.top = `${randomY}px`;
+            });
+        }
+
         // Funktion, um zufällige Positionen für Buttons zu generieren, außer für den bereits geklickten Button
         function randomizeButtonPositions(clickedButton) {
             const buttons = document.querySelectorAll('button');
