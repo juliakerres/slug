@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1</title>
+    <title>Lauftext im Tab</title>
     <style>
         * {
             font: 18px Hershey;
@@ -20,7 +20,7 @@
             background-color: transparent;
             border: none;
             vertical-align: super;
-            position: relative;
+            position: absolute;
             transition: filter 0.3s ease;
         }
 
@@ -34,73 +34,84 @@
         .fourth-button:before,
         .fifth-button:before,
         .sixth-button:before,
-        .seventh-button:before {
+        .seventh-button:before,
+        .eighth-button:before {
             perspective: 50px;
             perspective-origin: 45% 80%;
         }
 
-        .first-button::after {
-            content: '(ꕀ)';
-            color: blue;
-            position: absolute;
+        .first-button::after,
+        .second-button::after,
+        .third-button::after,
+        .fourth-button::after,
+        .fifth-button::after,
+        .sixth-button::after,
+        .seventh-button::after,
+        .eighth-button::after {
+            content: '';
+            color: rgb(0, 0, 0);
+
             rotate: 180deg;
-            top: 10;
+            top: 7px;
             right: 0;
-            bottom: 3;
+            bottom: -1px;
             left: 0;
             transform: scaleY(0.9) rotateX(0deg);
             transform-origin: 50% 90%;
             transform: skew(30deg, 0deg) scale(1, 1.2);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, filter 0.3s ease;
+        }
+
+        .first-button::after {
+            content: 'enter_u(i)rl_from_multiple_directions';
+            color: rgb(0, 0, 0);
+            position: absolute;
+            rotate: 0deg;
+            top: 15px;
+            right: 0;
+            bottom: -1px;
+            left: 0;
+            transform: scaleY(0.9) rotateX(0deg);
+            transform-origin: 50% 90%;
+            transform: skew(30deg, 0deg) scale(1, 1.2);
+            opacity: 0;
+            transition: opacity 0.3s ease, filter 0.3s ease;
         }
 
         .second-button::after {
             content: '(∼)';
-            color: blue;
             position: absolute;
-            rotate: 180deg;
-            top: 10;
-            right: 0;
-            bottom: 3;
-            left: 0;
-            transform: scaleY(0.9) rotateX(0deg);
-            transform-origin: 50% 90%;
-            transform: skew(30deg, 0deg) scale(1, 1.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .third-button::after {
             content: '(꒰)';
-            color: blue;
             position: absolute;
-            rotate: 180deg;
-            top: 10;
-            right: 0;
-            bottom: 3;
-            left: 0;
-            transform: scaleY(0.9) rotateX(0deg);
-            transform-origin: 50% 90%;
-            transform: skew(30deg, 0deg) scale(1, 1.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .fourth-button::after {
             content: '(➿)';
-            color: blue;
             position: absolute;
-            rotate: 180deg;
-            top: 10;
-            right: 0;
-            bottom: 3;
-            left: 0;
-            transform: scaleY(0.9) rotateX(0deg);
-            transform-origin: 50% 90%;
-            transform: skew(30deg, 0deg) scale(1, 1.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        }
+
+        .fifth-button::after {
+            content: '(-)';
+            position: absolute;
+        }
+
+        .sixth-button::after {
+            content: '(﹏)';
+            position: absolute;
+        }
+
+        .seventh-button::after {
+            content: '(๑)';
+            position: absolute;
+        }
+
+        .eighth-button::after {
+            content: '(◡)';
+            position: absolute;
         }
 
         .first-button:hover::after,
@@ -109,8 +120,17 @@
         .fourth-button:hover::after,
         .fifth-button:hover::after,
         .sixth-button:hover::after,
-        .seventh-button:hover::after {
+        .seventh-button:hover::after,
+        .eighth-button:hover::after {
             opacity: 0.3;
+            filter: blur(0.1px);
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -120,6 +140,13 @@
     <button class="second-button">(∼)</button>
     <button class="third-button">(꒰)</button>
     <button class="fourth-button">(➿)</button>
+
+    <button class="fifth-button">(-)</button>
+    <button class="sixth-button">(﹏)</button>
+    <button class="seventh-button">(๑)</button>
+    <button class="eighth-button">(◡)</button>
+
+    <canvas id="connectionCanvas"></canvas>
 
     <script>
         // Funktion zum Hinzufügen eines Slugs zur URL
@@ -133,38 +160,126 @@
 
         // Event-Listener für jeden Button hinzufügen
         document.querySelector('.first-button').addEventListener('click', function () {
-            addSlug('erste-adresse');
+            addSlug('enter-u(i)rl-from-multiple-directions');
         });
 
         document.querySelector('.second-button').addEventListener('click', function () {
-            addSlug('zweite-adresse');
+            addSlug('simply-suggesting-no-straight-line');
         });
 
         document.querySelector('.third-button').addEventListener('click', function () {
-            addSlug('dritte-adresse');
+            addSlug('a-repository-of-meaning');
         });
 
         document.querySelector('.fourth-button').addEventListener('click', function () {
-            addSlug('vierte-adresse');
+            addSlug('detached-from-the-institutionalised-thought');
         });
 
-        // Funktion zum Verarbeiten der URL beim Laden der Seite
-        function handlePageLoad() {
-            const path = window.location.pathname;
-            const parts = path.split('/').filter(Boolean); // Filtert leere Teile heraus
+        document.querySelector('.fifth-button').addEventListener('click', function () {
+            addSlug('holding-things-in-a-particular-powerful-relation-to-one-another-and-to-us');
+        });
 
-            if (parts.length > 0) {
-                // Nehme den letzten Teil der URL (den neuesten Slug)
-                const lastPart = parts[parts.length - 1];
+        document.querySelector('.sixth-button').addEventListener('click', function () {
+            addSlug('accumulated-in-hybrid-space-and-linked-to-the-matter-i--r--l');
+        });
 
-                // Hier könntest du Logik hinzufügen, um verschiedene Inhalte oder Zustände basierend auf dem Slug anzuzeigen
-                console.log(`Aktueller Slug: ${lastPart}`);
-                document.title = `URL geladen: ${lastPart}`;
+        document.querySelector('.seventh-button').addEventListener('click', function () {
+            addSlug('as-a-soft-blend-of-factual-and-non~factual');
+        });
+
+        document.querySelector('.eighth-button').addEventListener('click', function () {
+            addSlug('acting-as-a-reading-room');
+        });
+
+        // Funktion, um zufällige Positionen für Buttons zu generieren
+        function randomizeButtonPositions() {
+            const buttons = document.querySelectorAll('button');
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            buttons.forEach(button => {
+                const randomX = Math.floor(Math.random() * (windowWidth - button.offsetWidth));
+                const randomY = Math.floor(Math.random() * (windowHeight - button.offsetHeight));
+
+                button.style.left = `${randomX}px`;
+                button.style.top = `${randomY}px`;
+            });
+        }
+
+        // Rufe die Funktion beim Laden der Seite auf
+        window.addEventListener('load', randomizeButtonPositions);
+
+        // Rufe die Funktion auch bei Fenstergrößeänderungen auf
+        window.addEventListener('resize', randomizeButtonPositions);
+
+        // Canvas zum Zeichnen der "Linien"
+        const canvas = document.getElementById('connectionCanvas');
+        const ctx = canvas.getContext('2d');
+        let clickedButtons = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Funktion, um die Position eines Buttons zu bekommen
+        function getButtonPosition(button) {
+            const rect = button.getBoundingClientRect();
+            return {
+                x: rect.left + rect.width / 2,
+                y: rect.top + rect.height / 2
+            };
+        }
+
+        // Funktion, um "Linien" zwischen den angeklickten Buttons zu zeichnen
+        function drawLines() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (clickedButtons.length > 1) {
+                for (let i = 1; i < clickedButtons.length; i++) {
+                    const startX = clickedButtons[i - 1].x;
+                    const startY = clickedButtons[i - 1].y;
+                    const endX = clickedButtons[i].x;
+                    const endY = clickedButtons[i].y;
+                    const deltaX = endX - startX;
+                    const deltaY = endY - startY;
+                    const steps = Math.max(Math.abs(deltaX), Math.abs(deltaY)) / 10; // Adjust this value to increase/decrease the distance between symbols
+                    const xIncrement = deltaX / steps;
+                    const yIncrement = deltaY / steps;
+                    let x = startX;
+                    let y = startY;
+
+                    for (let j = 0; j <= steps; j++) {
+                        ctx.fillText('°', x, y);
+                        x += xIncrement;
+                        y += yIncrement;
+                    }
+                }
             }
         }
 
-        // Rufe handlePageLoad beim Laden der Seite auf
-        window.addEventListener('load', handlePageLoad);
+        // Event-Listener für alle Buttons hinzufügen
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function () {
+                const position = getButtonPosition(button);
+                clickedButtons.push(position);
+                drawLines();
+            });
+        });
+
+        // Titel-Scrolling-Funktion
+        const titleText = "ckeck-address-bar-";
+        let titleIndex = 0;
+
+        function scrollTitle() {
+            document.title = titleText.substring(titleIndex) + titleText.substring(0, titleIndex);
+            titleIndex = (titleIndex + 1) % titleText.length;
+        }
+
+        setInterval(scrollTitle, 200); // Geschwindigkeit des Scrollens in Millisekunden
     </script>
 </body>
 
